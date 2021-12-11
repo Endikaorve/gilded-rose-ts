@@ -26,13 +26,7 @@ export class GildedRose {
       } else if (this.itemIsBackstage(item)) {
         this.updateBackstage(item);
       } else {
-        this.setNewSellIn(item, -1);
-
-        if (this.checkItemSellIn(item, '<', 0)) {
-          this.setNewQuality(item, -2);
-        } else {
-          this.setNewQuality(item, -1);
-        }
+        this.updateBasic(item);
       }
     });
 
@@ -66,6 +60,16 @@ export class GildedRose {
       this.setNewQuality(item, 2);
     } else {
       this.setNewQuality(item, 1);
+    }
+  }
+
+  private updateBasic(item: Item) {
+    this.setNewSellIn(item, -1);
+
+    if (this.checkItemSellIn(item, '<', 0)) {
+      this.setNewQuality(item, -2);
+    } else {
+      this.setNewQuality(item, -1);
     }
   }
 
