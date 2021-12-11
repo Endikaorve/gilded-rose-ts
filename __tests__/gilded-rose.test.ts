@@ -54,4 +54,16 @@ describe('Gilded Rose', function () {
 
     expect(items[0].quality).toEqual(28);
   });
+
+  it('Queso Brie envejecido: una vez se pasa la fecha de venta, la calidad aumenta al doble de velocidad', function () {
+    const gildedRose = new GildedRose([new Item('Aged Brie', 10, 20)]);
+    const days = 11;
+
+    let items = [];
+    for (let index = 0; index < days; index++) {
+      items = gildedRose.updateQuality();
+    }
+
+    expect(items[0].quality).toEqual(32);
+  });
 });
