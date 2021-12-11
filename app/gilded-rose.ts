@@ -43,6 +43,10 @@ export class GildedRose {
     return item.name === 'Aged Brie';
   }
 
+  private itemIsConjured(item: Item) {
+    return item.name.toLowerCase().includes('conjured');
+  }
+
   // Funciones de mapeo
 
   private updateSulfurasItem(item: Item) {}
@@ -74,12 +78,13 @@ export class GildedRose {
   }
 
   private updateBasicItem(item: Item) {
+    const conjuredMultiplier: number = this.itemIsConjured(item) ? 2 : 1;
     this.setNewSellIn(item, -1);
 
     if (this.checkItemSellIn(item, '<', 0)) {
-      this.setNewQuality(item, -2);
+      this.setNewQuality(item, -2 * conjuredMultiplier);
     } else {
-      this.setNewQuality(item, -1);
+      this.setNewQuality(item, -1 * conjuredMultiplier);
     }
   }
 
