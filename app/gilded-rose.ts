@@ -29,12 +29,12 @@ export class GildedRose {
         if (this.checkItemQuality(item, '<', 50)) {
           this.setNewQuality(item, 1);
           if (this.itemIsBackstage(item)) {
-            if (item.sellIn < 11) {
+            if (this.checkItemSellIn(item, '<', 11)) {
               if (this.checkItemQuality(item, '<', 50)) {
                 this.setNewQuality(item, 1);
               }
             }
-            if (item.sellIn < 6) {
+            if (this.checkItemSellIn(item, '<', 6)) {
               if (this.checkItemQuality(item, '<', 50)) {
                 this.setNewQuality(item, 1);
               }
@@ -45,7 +45,7 @@ export class GildedRose {
       if (!this.itemIsSulfuras(item)) {
         this.setNewSellIn(item, -1);
       }
-      if (item.sellIn < 0) {
+      if (this.checkItemSellIn(item, '<', 0)) {
         if (!this.itemIsAgedBrie(item)) {
           if (!this.itemIsBackstage(item)) {
             if (this.checkItemQuality(item, '>', 0)) {
@@ -79,8 +79,9 @@ export class GildedRose {
     return item.name === 'Aged Brie';
   }
 
-  private itemQualityIsLessThan50(item: Item) {
-    return item.quality < 50;
+  private checkItemSellIn(item: Item, operator: '>' | '<', sellIn: number) {
+    if (operator === '<') return item.sellIn < sellIn;
+    if (operator === '>') return item.sellIn > sellIn;
   }
 
   private checkItemQuality(item: Item, operator: '>' | '<', quality: number) {
