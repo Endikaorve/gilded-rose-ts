@@ -57,8 +57,7 @@ export class GildedRose {
               }
             }
           } else {
-            this.items[i].quality =
-              this.items[i].quality - this.items[i].quality;
+            this.setNewQuality(this.items[i], -this.items[i].quality);
           }
         } else {
           if (this.itemQualityIsLessThan50(this.items[i])) {
