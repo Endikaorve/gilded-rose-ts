@@ -19,46 +19,44 @@ export class GildedRose {
 
   updateQuality() {
     this.items.forEach((item: Item) => {
-      if (!this.itemIsAgedBrie(item) && !this.itemIsBackstage(item)) {
-        if (this.checkItemQuality(item, '>', 0)) {
-          if (!this.itemIsSulfuras(item)) {
-            this.setNewQuality(item, -1);
-          }
-        }
+      if (this.itemIsSulfuras(item)) {
+        // No hace nada
       } else {
-        if (this.checkItemQuality(item, '<', 50)) {
-          this.setNewQuality(item, 1);
-          if (this.itemIsBackstage(item)) {
-            if (this.checkItemSellIn(item, '<', 11)) {
-              if (this.checkItemQuality(item, '<', 50)) {
-                this.setNewQuality(item, 1);
-              }
-            }
-            if (this.checkItemSellIn(item, '<', 6)) {
-              if (this.checkItemQuality(item, '<', 50)) {
-                this.setNewQuality(item, 1);
-              }
-            }
-          }
-        }
-      }
-      if (!this.itemIsSulfuras(item)) {
-        this.setNewSellIn(item, -1);
-      }
-      if (this.checkItemSellIn(item, '<', 0)) {
-        if (!this.itemIsAgedBrie(item)) {
-          if (!this.itemIsBackstage(item)) {
-            if (this.checkItemQuality(item, '>', 0)) {
-              if (!this.itemIsSulfuras(item)) {
-                this.setNewQuality(item, -1);
-              }
-            }
-          } else {
-            this.setNewQuality(item, -item.quality);
+        if (!this.itemIsAgedBrie(item) && !this.itemIsBackstage(item)) {
+          if (this.checkItemQuality(item, '>', 0)) {
+            this.setNewQuality(item, -1);
           }
         } else {
           if (this.checkItemQuality(item, '<', 50)) {
             this.setNewQuality(item, 1);
+            if (this.itemIsBackstage(item)) {
+              if (this.checkItemSellIn(item, '<', 11)) {
+                if (this.checkItemQuality(item, '<', 50)) {
+                  this.setNewQuality(item, 1);
+                }
+              }
+              if (this.checkItemSellIn(item, '<', 6)) {
+                if (this.checkItemQuality(item, '<', 50)) {
+                  this.setNewQuality(item, 1);
+                }
+              }
+            }
+          }
+        }
+        this.setNewSellIn(item, -1);
+        if (this.checkItemSellIn(item, '<', 0)) {
+          if (!this.itemIsAgedBrie(item)) {
+            if (!this.itemIsBackstage(item)) {
+              if (this.checkItemQuality(item, '>', 0)) {
+                this.setNewQuality(item, -1);
+              }
+            } else {
+              this.setNewQuality(item, -item.quality);
+            }
+          } else {
+            if (this.checkItemQuality(item, '<', 50)) {
+              this.setNewQuality(item, 1);
+            }
           }
         }
       }
