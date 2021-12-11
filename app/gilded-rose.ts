@@ -33,6 +33,20 @@ export class GildedRose {
     return this.items;
   }
 
+  // Funciones de clasificación de items
+
+  private itemIsSulfuras(item: Item) {
+    return item.name === 'Sulfuras, Hand of Ragnaros';
+  }
+
+  private itemIsBackstage(item: Item) {
+    return item.name === 'Backstage passes to a TAFKAL80ETC concert';
+  }
+
+  private itemIsAgedBrie(item: Item) {
+    return item.name === 'Aged Brie';
+  }
+
   // Funciones de mapeo
 
   private updateSulfurasItem(item: Item) {}
@@ -74,18 +88,6 @@ export class GildedRose {
   }
 
   // Funciones de utilidad
-
-  private itemIsSulfuras(item: Item) {
-    return item.name === 'Sulfuras, Hand of Ragnaros';
-  }
-
-  private itemIsBackstage(item: Item) {
-    return item.name === 'Backstage passes to a TAFKAL80ETC concert';
-  }
-
-  private itemIsAgedBrie(item: Item) {
-    return item.name === 'Aged Brie';
-  }
 
   private checkItemSellIn(
     item: Item,
