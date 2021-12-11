@@ -20,13 +20,13 @@ export class GildedRose {
   updateQuality() {
     this.items.forEach((item: Item) => {
       if (this.itemIsSulfuras(item)) {
-        this.updateSulfuras(item);
+        this.updateSulfurasItem(item);
       } else if (this.itemIsAgedBrie(item)) {
-        this.updateAgedBrie(item);
+        this.updateAgedBrieItem(item);
       } else if (this.itemIsBackstage(item)) {
-        this.updateBackstage(item);
+        this.updateBackstageItem(item);
       } else {
-        this.updateBasic(item);
+        this.updateBasicItem(item);
       }
     });
 
@@ -35,9 +35,9 @@ export class GildedRose {
 
   // Funciones de mapeo
 
-  private updateSulfuras(item: Item) {}
+  private updateSulfurasItem(item: Item) {}
 
-  private updateAgedBrie(item: Item) {
+  private updateAgedBrieItem(item: Item) {
     this.setNewSellIn(item, -1);
     if (this.checkItemSellIn(item, '<', 0)) {
       this.setNewQuality(item, 2);
@@ -46,7 +46,7 @@ export class GildedRose {
     }
   }
 
-  private updateBackstage(item: Item) {
+  private updateBackstageItem(item: Item) {
     this.setNewSellIn(item, -1);
 
     if (this.checkItemSellIn(item, '<', 0)) {
@@ -63,7 +63,7 @@ export class GildedRose {
     }
   }
 
-  private updateBasic(item: Item) {
+  private updateBasicItem(item: Item) {
     this.setNewSellIn(item, -1);
 
     if (this.checkItemSellIn(item, '<', 0)) {
