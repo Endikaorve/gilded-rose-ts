@@ -28,36 +28,29 @@ export class GildedRose {
         } else {
           this.setNewQuality(item, 1);
         }
-      } else {
-        if (!this.itemIsBackstage(item)) {
-          if (this.checkItemQuality(item, '>', 0)) {
-            this.setNewQuality(item, -1);
-          }
+      } else if (this.itemIsBackstage(item)) {
+        this.setNewSellIn(item, -1);
+
+        if (this.checkItemSellIn(item, '<', 0)) {
+          this.setNewQuality(item, -item.quality);
+        } else if (this.checkItemSellIn(item, '<=', 5)) {
+          this.setNewQuality(item, 3);
+        } else if (
+          this.checkItemSellIn(item, '>', 5) &&
+          this.checkItemSellIn(item, '<=', 10)
+        ) {
+          this.setNewQuality(item, 2);
         } else {
-          if (this.checkItemQuality(item, '<', 50)) {
-            this.setNewQuality(item, 1);
-            if (this.itemIsBackstage(item)) {
-              if (this.checkItemSellIn(item, '<', 11)) {
-                if (this.checkItemQuality(item, '<', 50)) {
-                  this.setNewQuality(item, 1);
-                }
-              }
-              if (this.checkItemSellIn(item, '<', 6)) {
-                if (this.checkItemQuality(item, '<', 50)) {
-                  this.setNewQuality(item, 1);
-                }
-              }
-            }
-          }
+          this.setNewQuality(item, 1);
+        }
+      } else {
+        if (this.checkItemQuality(item, '>', 0)) {
+          this.setNewQuality(item, -1);
         }
         this.setNewSellIn(item, -1);
         if (this.checkItemSellIn(item, '<', 0)) {
-          if (!this.itemIsBackstage(item)) {
-            if (this.checkItemQuality(item, '>', 0)) {
-              this.setNewQuality(item, -1);
-            }
-          } else {
-            this.setNewQuality(item, -item.quality);
+          if (this.checkItemQuality(item, '>', 0)) {
+            this.setNewQuality(item, -1);
           }
         }
       }
