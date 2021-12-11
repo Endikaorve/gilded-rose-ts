@@ -98,17 +98,6 @@ export class GildedRose {
     if (operator === '>=') return item.sellIn >= sellIn;
   }
 
-  private checkItemQuality(
-    item: Item,
-    operator: '>' | '<' | '<=' | '>=',
-    quality: number
-  ) {
-    if (operator === '<') return item.quality < quality;
-    if (operator === '>') return item.quality > quality;
-    if (operator === '<=') return item.quality <= quality;
-    if (operator === '>=') return item.quality >= quality;
-  }
-
   private setNewQuality(item: Item, quality: number) {
     item.quality = item.quality + quality;
     if (item.quality > 50) item.quality = 50;
