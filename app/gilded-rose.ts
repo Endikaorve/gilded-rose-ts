@@ -25,23 +25,23 @@ export class GildedRose {
       ) {
         if (this.items[i].quality > 0) {
           if (!this.itemIsSulfuras(this.items[i])) {
-            this.items[i].quality = this.items[i].quality - 1;
+            this.setNewQuality(this.items[i], -1);
           }
         }
       } else {
         if (this.itemQualityIsLessThan50(this.items[i])) {
-          this.items[i].quality = this.items[i].quality + 1;
+          this.setNewQuality(this.items[i], 1);
           if (
             this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert'
           ) {
             if (this.items[i].sellIn < 11) {
               if (this.itemQualityIsLessThan50(this.items[i])) {
-                this.items[i].quality = this.items[i].quality + 1;
+                this.setNewQuality(this.items[i], 1);
               }
             }
             if (this.items[i].sellIn < 6) {
               if (this.itemQualityIsLessThan50(this.items[i])) {
-                this.items[i].quality = this.items[i].quality + 1;
+                this.setNewQuality(this.items[i], 1);
               }
             }
           }
@@ -57,7 +57,7 @@ export class GildedRose {
           ) {
             if (this.items[i].quality > 0) {
               if (!this.itemIsSulfuras(this.items[i])) {
-                this.items[i].quality = this.items[i].quality - 1;
+                this.setNewQuality(this.items[i], -1);
               }
             }
           } else {
@@ -66,7 +66,7 @@ export class GildedRose {
           }
         } else {
           if (this.itemQualityIsLessThan50(this.items[i])) {
-            this.items[i].quality = this.items[i].quality + 1;
+            this.setNewQuality(this.items[i], 1);
           }
         }
       }
@@ -81,5 +81,10 @@ export class GildedRose {
 
   private itemQualityIsLessThan50(item: Item) {
     return item.quality < 50;
+  }
+
+  private setNewQuality(item: Item, quality: number) {
+    item.quality = item.quality + quality;
+    return item;
   }
 }
