@@ -44,14 +44,12 @@ export class GildedRose {
           this.setNewQuality(item, 1);
         }
       } else {
-        if (this.checkItemQuality(item, '>', 0)) {
-          this.setNewQuality(item, -1);
-        }
         this.setNewSellIn(item, -1);
+
         if (this.checkItemSellIn(item, '<', 0)) {
-          if (this.checkItemQuality(item, '>', 0)) {
-            this.setNewQuality(item, -1);
-          }
+          this.setNewQuality(item, -2);
+        } else {
+          this.setNewQuality(item, -1);
         }
       }
     });
@@ -96,6 +94,7 @@ export class GildedRose {
   private setNewQuality(item: Item, quality: number) {
     item.quality = item.quality + quality;
     if (item.quality > 50) item.quality = 50;
+    if (item.quality < 0) item.quality = 0;
     return item;
   }
 
