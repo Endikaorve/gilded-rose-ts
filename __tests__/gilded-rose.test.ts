@@ -84,4 +84,18 @@ describe('Gilded Rose', function () {
 
     expect(items[0].quality).toEqual(50);
   });
+
+  it('Sulfuras: su fecha nunca cambia', function () {
+    const gildedRose = new GildedRose([
+      new Item('Sulfuras, Hand of Ragnaros', 10, 45),
+    ]);
+    const days = 6;
+
+    let items = [];
+    for (let index = 0; index < days; index++) {
+      items = gildedRose.updateQuality();
+    }
+
+    expect(items[0].sellIn).toEqual(10);
+  });
 });
