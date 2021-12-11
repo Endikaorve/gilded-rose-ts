@@ -18,4 +18,16 @@ describe('Gilded Rose', function () {
 
     expect(items[0].quality).toEqual(12);
   });
+
+  it('Item básico: una vez se pasa la fecha de venta, la calidad se degrada al doble de velocidad', function () {
+    const gildedRose = new GildedRose([new Item('Test básico', 10, 20)]);
+    const days = 11;
+
+    let items = [];
+    for (let index = 0; index < days; index++) {
+      items = gildedRose.updateQuality();
+    }
+
+    expect(items[0].quality).toEqual(8);
+  });
 });
