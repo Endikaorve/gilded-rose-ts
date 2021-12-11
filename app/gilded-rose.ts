@@ -20,22 +20,22 @@ export class GildedRose {
   updateQuality() {
     this.items.forEach((item: Item) => {
       if (!this.itemIsAgedBrie(item) && !this.itemIsBackstage(item)) {
-        if (item.quality > 0) {
+        if (this.checkItemQuality(item, '>', 0)) {
           if (!this.itemIsSulfuras(item)) {
             this.setNewQuality(item, -1);
           }
         }
       } else {
-        if (this.itemQualityIsLessThan50(item)) {
+        if (this.checkItemQuality(item, '<', 50)) {
           this.setNewQuality(item, 1);
           if (this.itemIsBackstage(item)) {
             if (item.sellIn < 11) {
-              if (this.itemQualityIsLessThan50(item)) {
+              if (this.checkItemQuality(item, '<', 50)) {
                 this.setNewQuality(item, 1);
               }
             }
             if (item.sellIn < 6) {
-              if (this.itemQualityIsLessThan50(item)) {
+              if (this.checkItemQuality(item, '<', 50)) {
                 this.setNewQuality(item, 1);
               }
             }
@@ -48,7 +48,7 @@ export class GildedRose {
       if (item.sellIn < 0) {
         if (!this.itemIsAgedBrie(item)) {
           if (!this.itemIsBackstage(item)) {
-            if (item.quality > 0) {
+            if (this.checkItemQuality(item, '>', 0)) {
               if (!this.itemIsSulfuras(item)) {
                 this.setNewQuality(item, -1);
               }
@@ -57,7 +57,7 @@ export class GildedRose {
             this.setNewQuality(item, -item.quality);
           }
         } else {
-          if (this.itemQualityIsLessThan50(item)) {
+          if (this.checkItemQuality(item, '<', 50)) {
             this.setNewQuality(item, 1);
           }
         }
@@ -81,6 +81,11 @@ export class GildedRose {
 
   private itemQualityIsLessThan50(item: Item) {
     return item.quality < 50;
+  }
+
+  private checkItemQuality(item: Item, operator: '>' | '<', quality: number) {
+    if (operator === '<') return item.quality < quality;
+    if (operator === '>') return item.quality > quality;
   }
 
   private setNewQuality(item: Item, quality: number) {
