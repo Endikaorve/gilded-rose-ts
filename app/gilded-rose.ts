@@ -21,8 +21,15 @@ export class GildedRose {
     this.items.forEach((item: Item) => {
       if (this.itemIsSulfuras(item)) {
         // No hace nada
+      } else if (this.itemIsAgedBrie(item)) {
+        this.setNewSellIn(item, -1);
+        if (this.checkItemSellIn(item, '<', 0)) {
+          this.setNewQuality(item, 2);
+        } else {
+          this.setNewQuality(item, 1);
+        }
       } else {
-        if (!this.itemIsAgedBrie(item) && !this.itemIsBackstage(item)) {
+        if (!this.itemIsBackstage(item)) {
           if (this.checkItemQuality(item, '>', 0)) {
             this.setNewQuality(item, -1);
           }
@@ -45,18 +52,12 @@ export class GildedRose {
         }
         this.setNewSellIn(item, -1);
         if (this.checkItemSellIn(item, '<', 0)) {
-          if (!this.itemIsAgedBrie(item)) {
-            if (!this.itemIsBackstage(item)) {
-              if (this.checkItemQuality(item, '>', 0)) {
-                this.setNewQuality(item, -1);
-              }
-            } else {
-              this.setNewQuality(item, -item.quality);
+          if (!this.itemIsBackstage(item)) {
+            if (this.checkItemQuality(item, '>', 0)) {
+              this.setNewQuality(item, -1);
             }
           } else {
-            if (this.checkItemQuality(item, '<', 50)) {
-              this.setNewQuality(item, 1);
-            }
+            this.setNewQuality(item, -item.quality);
           }
         }
       }
@@ -77,18 +78,31 @@ export class GildedRose {
     return item.name === 'Aged Brie';
   }
 
-  private checkItemSellIn(item: Item, operator: '>' | '<', sellIn: number) {
+  private checkItemSellIn(
+    item: Item,
+    operator: '>' | '<' | '<=' | '>=',
+    sellIn: number
+  ) {
     if (operator === '<') return item.sellIn < sellIn;
     if (operator === '>') return item.sellIn > sellIn;
+    if (operator === '<=') return item.sellIn <= sellIn;
+    if (operator === '>=') return item.sellIn >= sellIn;
   }
 
-  private checkItemQuality(item: Item, operator: '>' | '<', quality: number) {
+  private checkItemQuality(
+    item: Item,
+    operator: '>' | '<' | '<=' | '>=',
+    quality: number
+  ) {
     if (operator === '<') return item.quality < quality;
     if (operator === '>') return item.quality > quality;
+    if (operator === '<=') return item.quality <= quality;
+    if (operator === '>=') return item.quality >= quality;
   }
 
   private setNewQuality(item: Item, quality: number) {
     item.quality = item.quality + quality;
+    if (item.quality > 50) item.quality = 50;
     return item;
   }
 
