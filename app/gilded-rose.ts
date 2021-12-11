@@ -18,54 +18,51 @@ export class GildedRose {
   }
 
   updateQuality() {
-    for (let i = 0; i < this.items.length; i++) {
-      if (
-        !this.itemIsAgedBrie(this.items[i]) &&
-        !this.itemIsBackstage(this.items[i])
-      ) {
-        if (this.items[i].quality > 0) {
-          if (!this.itemIsSulfuras(this.items[i])) {
-            this.setNewQuality(this.items[i], -1);
+    this.items.forEach((item: Item) => {
+      if (!this.itemIsAgedBrie(item) && !this.itemIsBackstage(item)) {
+        if (item.quality > 0) {
+          if (!this.itemIsSulfuras(item)) {
+            this.setNewQuality(item, -1);
           }
         }
       } else {
-        if (this.itemQualityIsLessThan50(this.items[i])) {
-          this.setNewQuality(this.items[i], 1);
-          if (this.itemIsBackstage(this.items[i])) {
-            if (this.items[i].sellIn < 11) {
-              if (this.itemQualityIsLessThan50(this.items[i])) {
-                this.setNewQuality(this.items[i], 1);
+        if (this.itemQualityIsLessThan50(item)) {
+          this.setNewQuality(item, 1);
+          if (this.itemIsBackstage(item)) {
+            if (item.sellIn < 11) {
+              if (this.itemQualityIsLessThan50(item)) {
+                this.setNewQuality(item, 1);
               }
             }
-            if (this.items[i].sellIn < 6) {
-              if (this.itemQualityIsLessThan50(this.items[i])) {
-                this.setNewQuality(this.items[i], 1);
+            if (item.sellIn < 6) {
+              if (this.itemQualityIsLessThan50(item)) {
+                this.setNewQuality(item, 1);
               }
             }
           }
         }
       }
-      if (!this.itemIsSulfuras(this.items[i])) {
-        this.items[i].sellIn = this.items[i].sellIn - 1;
+      if (!this.itemIsSulfuras(item)) {
+        item.sellIn = item.sellIn - 1;
       }
-      if (this.items[i].sellIn < 0) {
-        if (!this.itemIsAgedBrie(this.items[i])) {
-          if (!this.itemIsBackstage(this.items[i])) {
-            if (this.items[i].quality > 0) {
-              if (!this.itemIsSulfuras(this.items[i])) {
-                this.setNewQuality(this.items[i], -1);
+      if (item.sellIn < 0) {
+        if (!this.itemIsAgedBrie(item)) {
+          if (!this.itemIsBackstage(item)) {
+            if (item.quality > 0) {
+              if (!this.itemIsSulfuras(item)) {
+                this.setNewQuality(item, -1);
               }
             }
           } else {
-            this.setNewQuality(this.items[i], -this.items[i].quality);
+            this.setNewQuality(item, -item.quality);
           }
         } else {
-          if (this.itemQualityIsLessThan50(this.items[i])) {
-            this.setNewQuality(this.items[i], 1);
+          if (this.itemQualityIsLessThan50(item)) {
+            this.setNewQuality(item, 1);
           }
         }
       }
-    }
+    });
 
     return this.items;
   }
