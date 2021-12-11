@@ -20,7 +20,7 @@ export class GildedRose {
   updateQuality() {
     this.items.forEach((item: Item) => {
       if (this.itemIsSulfuras(item)) {
-        // No hace nada
+        item = this.updateSulfuras(item);
       } else if (this.itemIsAgedBrie(item)) {
         this.setNewSellIn(item, -1);
         if (this.checkItemSellIn(item, '<', 0)) {
@@ -56,6 +56,14 @@ export class GildedRose {
 
     return this.items;
   }
+
+  // Funciones de mapeo
+
+  private updateSulfuras(item: Item): Item {
+    return item;
+  }
+
+  // Funciones de utilidad
 
   private itemIsSulfuras(item: Item) {
     return item.name === 'Sulfuras, Hand of Ragnaros';
