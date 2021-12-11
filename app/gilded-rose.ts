@@ -43,7 +43,7 @@ export class GildedRose {
         }
       }
       if (!this.itemIsSulfuras(item)) {
-        item.sellIn = item.sellIn - 1;
+        this.setNewSellIn(item, -1);
       }
       if (item.sellIn < 0) {
         if (!this.itemIsAgedBrie(item)) {
@@ -85,6 +85,11 @@ export class GildedRose {
 
   private setNewQuality(item: Item, quality: number) {
     item.quality = item.quality + quality;
+    return item;
+  }
+
+  private setNewSellIn(item: Item, sellIn: number) {
+    item.sellIn = item.sellIn + sellIn;
     return item;
   }
 }
