@@ -66,4 +66,10 @@ describe('Gilded Rose', function () {
 
     expect(items[0].quality).toEqual(32);
   });
+
+  xit('La calidad no debería ser nunca mayor a 50', function () {
+    const gildedRose = new GildedRose([new Item('foo', 10, 55)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toEqual(50);
+  });
 });
