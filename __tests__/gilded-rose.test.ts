@@ -4,7 +4,7 @@ describe('Gilded Rose', function () {
   it('El nombre no debería verse afectado', function () {
     const gildedRose = new GildedRose([new Item('Ítem básico', 0, 0)]);
     const items = gildedRose.updateQuality();
-    expect(items[0].name).toEqual('foo');
+    expect(items[0].name).toEqual('Ítem básico');
   });
 
   xit('La calidad no debería ser nunca mayor a 50', function () {
