@@ -20,7 +20,7 @@ export class GildedRose {
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
       if (
-        this.items[i].name != 'Aged Brie' &&
+        !this.itemIsAgedBrie(this.items[i]) &&
         !this.itemIsBackstage(this.items[i])
       ) {
         if (this.items[i].quality > 0) {
@@ -49,7 +49,7 @@ export class GildedRose {
         this.items[i].sellIn = this.items[i].sellIn - 1;
       }
       if (this.items[i].sellIn < 0) {
-        if (this.items[i].name != 'Aged Brie') {
+        if (!this.itemIsAgedBrie(this.items[i])) {
           if (!this.itemIsBackstage(this.items[i])) {
             if (this.items[i].quality > 0) {
               if (!this.itemIsSulfuras(this.items[i])) {
@@ -77,6 +77,10 @@ export class GildedRose {
 
   private itemIsBackstage(item: Item) {
     return item.name === 'Backstage passes to a TAFKAL80ETC concert';
+  }
+
+  private itemIsAgedBrie(item: Item) {
+    return item.name === 'Aged Brie';
   }
 
   private itemQualityIsLessThan50(item: Item) {
