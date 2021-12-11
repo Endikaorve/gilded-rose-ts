@@ -112,4 +112,18 @@ describe('Gilded Rose', function () {
 
     expect(items[0].quality).toEqual(45);
   });
+
+  it('Backstage: si faltan 10 días o menos para el concierto, la calidad se incrementa en 2 unidades', function () {
+    const gildedRose = new GildedRose([
+      new Item('Backstage passes to a TAFKAL80ETC concert', 10, 20),
+    ]);
+    const days = 2;
+
+    let items = [];
+    for (let index = 0; index < days; index++) {
+      items = gildedRose.updateQuality();
+    }
+
+    expect(items[0].quality).toEqual(24);
+  });
 });
