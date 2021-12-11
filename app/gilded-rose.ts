@@ -24,20 +24,7 @@ export class GildedRose {
       } else if (this.itemIsAgedBrie(item)) {
         this.updateAgedBrie(item);
       } else if (this.itemIsBackstage(item)) {
-        this.setNewSellIn(item, -1);
-
-        if (this.checkItemSellIn(item, '<', 0)) {
-          this.setNewQuality(item, -item.quality);
-        } else if (this.checkItemSellIn(item, '<=', 5)) {
-          this.setNewQuality(item, 3);
-        } else if (
-          this.checkItemSellIn(item, '>', 5) &&
-          this.checkItemSellIn(item, '<=', 10)
-        ) {
-          this.setNewQuality(item, 2);
-        } else {
-          this.setNewQuality(item, 1);
-        }
+        this.updateBackstage(item);
       } else {
         this.setNewSellIn(item, -1);
 
@@ -59,6 +46,23 @@ export class GildedRose {
   private updateAgedBrie(item: Item) {
     this.setNewSellIn(item, -1);
     if (this.checkItemSellIn(item, '<', 0)) {
+      this.setNewQuality(item, 2);
+    } else {
+      this.setNewQuality(item, 1);
+    }
+  }
+
+  private updateBackstage(item: Item) {
+    this.setNewSellIn(item, -1);
+
+    if (this.checkItemSellIn(item, '<', 0)) {
+      this.setNewQuality(item, -item.quality);
+    } else if (this.checkItemSellIn(item, '<=', 5)) {
+      this.setNewQuality(item, 3);
+    } else if (
+      this.checkItemSellIn(item, '>', 5) &&
+      this.checkItemSellIn(item, '<=', 10)
+    ) {
       this.setNewQuality(item, 2);
     } else {
       this.setNewQuality(item, 1);
