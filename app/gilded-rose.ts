@@ -29,18 +29,18 @@ export class GildedRose {
           }
         }
       } else {
-        if (this.items[i].quality < 50) {
+        if (this.itemQualityIsLessThan50(this.items[i])) {
           this.items[i].quality = this.items[i].quality + 1;
           if (
             this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert'
           ) {
             if (this.items[i].sellIn < 11) {
-              if (this.items[i].quality < 50) {
+              if (this.itemQualityIsLessThan50(this.items[i])) {
                 this.items[i].quality = this.items[i].quality + 1;
               }
             }
             if (this.items[i].sellIn < 6) {
-              if (this.items[i].quality < 50) {
+              if (this.itemQualityIsLessThan50(this.items[i])) {
                 this.items[i].quality = this.items[i].quality + 1;
               }
             }
@@ -65,7 +65,7 @@ export class GildedRose {
               this.items[i].quality - this.items[i].quality;
           }
         } else {
-          if (this.items[i].quality < 50) {
+          if (this.itemQualityIsLessThan50(this.items[i])) {
             this.items[i].quality = this.items[i].quality + 1;
           }
         }
@@ -77,5 +77,9 @@ export class GildedRose {
 
   private itemIsSulfuras(item: Item) {
     return item.name === 'Sulfuras, Hand of Ragnaros';
+  }
+
+  private itemQualityIsLessThan50(item: Item) {
+    return item.quality < 50;
   }
 }
