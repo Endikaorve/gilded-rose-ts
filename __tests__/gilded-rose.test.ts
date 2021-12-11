@@ -168,4 +168,18 @@ describe('Gilded Rose', function () {
 
     expect(items[0].quality).toEqual(4);
   });
+
+  it('Conjured + Item básico: una vez se pasa la fecha de venta, la calidad se degrada al doble de velocidad (de 4 en 4)', function () {
+    const gildedRose = new GildedRose([
+      new Item('Conjured Ítem básico', 5, 40),
+    ]);
+    const days = 6;
+
+    let items = [];
+    for (let index = 0; index < days; index++) {
+      items = gildedRose.updateQuality();
+    }
+
+    expect(items[0].quality).toEqual(26);
+  });
 });
