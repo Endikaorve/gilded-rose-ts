@@ -30,4 +30,16 @@ describe('Gilded Rose', function () {
 
     expect(items[0].quality).toEqual(8);
   });
+
+  it('Item básico: la calidad nunca es negativa', function () {
+    const gildedRose = new GildedRose([new Item('Test básico', 10, 10)]);
+    const days = 11;
+
+    let items = [];
+    for (let index = 0; index < days; index++) {
+      items = gildedRose.updateQuality();
+    }
+
+    expect(items[0].quality).toEqual(0);
+  });
 });
